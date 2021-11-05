@@ -70,12 +70,8 @@ def latest_version(package_name):
         request = requests.get(NEW_BASE_URL.format(package_name = package_name))
         if request.ok == True:
             json = request.json()
-            releases = json['releases']
-            versions = []
-            for key, value in releases.items():
-                versions.append(key)
-            version = max(versions)
-            
+            version = json['info']['version']
             return version
         else:
             return None
+
